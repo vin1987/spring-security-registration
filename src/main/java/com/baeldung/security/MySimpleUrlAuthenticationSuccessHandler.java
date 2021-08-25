@@ -89,16 +89,18 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         for (final GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("READ_PRIVILEGE")) {
                 isUser = true;
-            } else if (grantedAuthority.getAuthority().equals("WRITE_PRIVILEGE")) {
+            }
+            else if (grantedAuthority.getAuthority().equals("WRITE_PRIVILEGE")) {
                 isAdmin = true;
                 isUser = false;
-            } else if (grantedAuthority.getAuthority().equals("READ_PRIVILEGE") && grantedAuthority.getAuthority().equals("WRITE_PRIVILEGE")) {
+            }else if (grantedAuthority.getAuthority().equals("MANAGER_PRIVILEGE")) {
+                isManager = true;
                 isAdmin = false;
                 isUser = false;
-                isManager= true;
                 break;
-            }
+            } 
         }
+
         if (isUser) {
         	 String username;
              if (authentication.getPrincipal() instanceof User) {
@@ -111,7 +113,8 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
             return "/homepage.html?user="+username;
         } else if (isAdmin) {
             return "/console";
-        }else if (isManager) {
+        } 
+        else if (isManager) {
             return "/management.html";
         }
          else {

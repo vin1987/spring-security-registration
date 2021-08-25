@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -34,13 +35,14 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Autowired
     private MessageSource messageSource;
-
+    
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/login");
         registry.addViewController("/loginRememberMe");
         registry.addViewController("/customLogin");
         registry.addViewController("/registration.html");
+        registry.addViewController("/management.html");
         registry.addViewController("/registrationCaptcha.html");
         registry.addViewController("/registrationReCaptchaV3.html");
         registry.addViewController("/logout.html");
@@ -56,7 +58,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/changePassword.html");
         registry.addViewController("/users.html");
         registry.addViewController("/qrcode.html");
-        registry.addViewController("/management.html");
+       
     }
 
     @Override
